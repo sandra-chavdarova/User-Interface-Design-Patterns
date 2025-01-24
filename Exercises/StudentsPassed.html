@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sabloni studenti vezbanje</title>
+    <style>
+        .item {
+            display: inline-block;
+            padding: 10px;
+            margin-left: 20px;
+            vertical-align: top;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .item:first-child {
+            border-right: 1px solid black;
+        }
+
+        .selected {
+            background: lightgreen;
+        }
+    </style>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+</head>
+<body>
+<div id="tabs">
+    <ul>
+        <li><a href="#tabs-1">Students</a></li>
+        <li><a href="#tabs-2">Grades</a></li>
+    </ul>
+    <div id="tabs-1">
+        <div class="item">
+            <h3>Before review</h3>
+            <ul id="left_list">
+                <li title="30" index="111111"><input type="checkbox">Name Surname 1</li>
+                <li title="85" index="111112"><input type="checkbox">Name Surname 2</li>
+                <li title="65" index="111113"><input type="checkbox">Name Surname 3</li>
+                <li title="73" index="111114"><input type="checkbox">Name Surname 4</li>
+                <li title="91" index="111115"><input type="checkbox">Name Surname 5</li>
+            </ul>
+        </div>
+        <div class="item">
+            <h3>After review</h3>
+            <ul id="right_list">
+                <li title="55" index="111116"><input type="checkbox">Name Surname 6</li>
+                <li title="82" index="111117"><input type="checkbox">Name Surname 7</li>
+            </ul>
+        </div>
+        <br>
+        <button id="to_left"><-</button>
+        <button id="to_right">-></button>
+    </div>
+    <div id="tabs-2">
+        <div id="progress_6"></div>
+        <p>Grade 6: <span id="percentage_6"></span></p>
+        <div id="progress_7"></div>
+        <p>Grade 7: <span id="percentage_7"></span></p>
+        <div id="progress_8"></div>
+        <p>Grade 8: <span id="percentage_8"></span></p>
+        <div id="progress_9"></div>
+        <p>Grade 9: <span id="percentage_9"></span></p>
+        <div id="progress_10"></div>
+        <p>Grade 10: <span id="percentage_10"></span></p>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#tabs").tabs();
+        $(document).tooltip({
+            content: function () {
+                console.log("povik")
+                return "Points: " + $(this).attr("title") + " Index: " + $(this).attr("index");
+            }
+        })
+        $("[type=checkbox]").click(function () {
+            if ($(this).prop("checked")) {
+                $(this).parent().addClass("selected");
+            } else {
+                $(this).parent().removeClass("selected");
+            }
+        })
+        $("#to_right").click(function () {
+            $("#left_list .selected").each(function (index, item) {
+                if ($(this).attr("title") > 50) {
+                    $(this).appendTo("#right_list");
+                    $(this).removeClass("selected");
+                    $(this).find("input").attr("checked", false);
+                } else {
+                    alert("This student didn't pass");
+                }
+            })
+            update_progress();
+        })
+        $("#to_left").click(function () {
+            $("#right_list .selected").each(function (index, item) {
+                $(this).appendTo("#left_list");
+                $(this).removeClass("selected");
+                $(this).find("input").attr("checked", false);
+            })
+            update_progress();
+        })
+
+        function update_progress() {
+            let total = $("li").length;
+            for (let i = 6; i < 11; i++) {
+                let grade = 0;
+                $("#right_list li").each(function (index, item) {
+                    if ($(this).attr("title") > ((i - 1) * 10) && $(this).attr("title") <= (i * 10)) {
+                        grade += 1;
+                    }
+                    if ($(this).attr("title") == 50 && i === 6) {
+                        grade += 1;
+                    }
+                })
+                let percentage = ((grade / total) * 100);
+                $("#progress_" + i).progressbar({value: percentage})
+                $("#percentage_" + i).html(percentage.toPrecision(3) + "%");
+            }
+        }
+        update_progress();
+    })
+</script>
+</body>
+</html>

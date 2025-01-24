@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        body {
+            font-size: 17px;
+            font-family: Calibri, serif;
+        }
+
+        #label {
+            font-size: 12px;
+            margin-left: 5px;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid black;
+            border-radius: 20px;
+            width: 250px;
+            text-align: center;
+            background: lightblue;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        #details, #books {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #details {
+            padding: 15px;
+            margin: 10px;
+            border: 2px solid black;
+            background: honeydew;
+            width: 250px;
+        }
+
+        img {
+            margin: 5px;
+            width: 50px;
+            height: 50px;
+        }
+
+        #input {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="input">
+    <label for="isbn">ISBN: <input type="text" id="isbn"></label><br><span id="label">10 or 13 digits</span>
+    <br>
+    <button id="add_book">Add Book</button>
+</div>
+
+<ul id="books">
+
+</ul>
+
+<div id="details">
+    <p>Title: <span id="title"></span></p>
+    <p>ISBN: <span id="isbn_details"></span></p>
+    <p>Publishers: <span id="publishers"></span></p>
+    <img src="" id="image"><br>
+    <a href="" id="link">Details</a>
+</div>
+
+<footer>
+    <a href="https://linkedin.com"><img src="../images/linkedin.png" height="1080" width="1080"/></a>
+    <a href="https://instagram.com"><img src="../images/instagram.jpg" height="640" width="640"/></a>
+    <a href="https://facebook.com"><img src="../images/facebook.jpg" height="2048" width="2048"/></a>
+</footer>
+
+<script>
+    $(document).ready(function () {
+        $("#details").hide();
+        $("#add_book").click(function () {
+            let isbn = $("#isbn").val();
+            $.ajax({
+                url: "https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn + "&jscmd=details&callback=mycallback",
+                dataType: "jsonp",
+                success: function (data) {
+                    let title = data["ISBN:" + isbn]["details"]["title"]
+                    let publishers = data["ISBN:" + isbn]["details"]["publishers"][0];
+                    let image = data["ISBN:" + isbn]["thumbnail_url"];
+                    let link = data["ISBN:" + isbn]["info_url"];
+                    $("<li isbn='" + isbn + "' publishers='" + publishers + "' image='" + image + "' link='" + link + "'>" + title + "</li>").appendTo("#books");
+                }
+            })
+        })
+
+        $(document).on("click", "#books li", function () {
+            // $("#details").hide();
+            $("#title").html($(this).html());
+            $("#isbn_details").html($(this).attr("isbn"));
+            $("#publishers").html($(this).attr("publishers"));
+            $("#image").attr("src", $(this).attr("image"));
+            $("#link").attr("href", $(this).attr("link"));
+            $("#details").show();
+        })
+    })
+</script>
+</body>
+</html>
+<!--
+9780140328721
+0439023483
+0141180854
+9780060006983
+0439136350
+-->

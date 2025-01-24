@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.structure.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #compact, #flashes, #dslr {
+            display: none;
+        }
+
+        #nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #nav div {
+            background: lightgray;
+            padding: 10px;
+            cursor: pointer; /* se menuva kursorot */
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .item {
+            border: 1px solid black;
+            padding: 20px;
+            margin-bottom: 15px;
+            height: 300px;
+            width: 250px;
+        }
+
+        button {
+            display: none;
+        }
+
+        h3, .data {
+            margin: 0; /* za da ne skoka so toggle */
+        }
+
+        #accordion div {
+            width: 250px;
+            border: 1px solid black;
+        }
+
+        img{
+            width: 200px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="nav">
+    <div title="compact">
+        Compact Digital Cameras
+    </div>
+    <div title="dslr">
+        DSLR Cameras
+    </div>
+    <div title="flashes">
+        Speedlight Flashes
+    </div>
+</div>
+
+<div id="compact">
+    <h1>Compact Digital Cameras</h1>
+    <div class="container">
+        <div class="row">
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/Canon.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dslr">
+    <h1>DSLR Cameras</h1>
+    <div class="container">
+        <div class="row">
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/dslr.png"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="flashes">
+    <h1>Speedlight Flashes</h1>
+    <div class="container">
+        <div class="row">
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+            <div class="item">
+                <img src="../images/flashes.jpg"/>
+                <h3>Powershot</h3>
+                <button>Add to cart</button>
+                <button>Rate</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="accordion">
+    <div>
+        <h3>Get Inspired</h3>
+        <div class="data">
+            <ul>
+                <li>Stories</li>
+                <li>Techniques</li>
+                <li>Gallery</li>
+                <li>Showcase</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h3>Support</h3>
+        <div class="data">
+            <ul>
+                <li>Stories</li>
+                <li>Techniques</li>
+                <li>Gallery</li>
+                <li>Showcase</li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        <h3>Services and Apps</h3>
+        <div class="data">
+            <div>
+                <h3>More...</h3>
+                <div class="data">
+                    <ul>
+                        <li>Stories</li>
+                        <li>Techniques</li>
+                        <li>Gallery</li>
+                        <li>Showcase</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#compact").hide();
+        $("#dslr").hide();
+        $("#flashes").hide();
+
+        $(".item h3").hover(function () {
+            $(this).siblings("button").show();
+        }, function () {
+            $(this).siblings("button").hide();
+        })
+
+        $("#nav div").click(function () {
+            $("#compact").hide();
+            $("#dslr").hide();
+            $("#flashes").hide();
+            let title = $(this).attr("title");
+            $("#" + title).show();
+        })
+
+        $(".data").hide();
+
+        $("#accordion h3").click(function () {
+            $(this).siblings(".data").slideToggle(200);
+        })
+    })
+</script>
+</body>
+</html>

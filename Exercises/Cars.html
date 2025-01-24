@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        body {
+            font-family: Calibri, serif;
+            font-size: 17px;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid black;
+            background: lightblue;
+            text-align: center;
+            width: 200px;
+            cursor: pointer;
+        }
+
+        span {
+            display: none;
+            margin: 0;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        #manufacturers, #models, #favoritesDiv {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #favorites li {
+            background: lightgreen;
+        }
+
+        #favorites {
+            height: 500px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<ul id="manufacturers">
+    <li code="44">Peugeot</li>
+    <li code="59">VolksWagen</li>
+    <li code="21">Fiat</li>
+    <li code="52">Seat</li>
+</ul>
+
+<ul id="models">
+
+</ul>
+
+<div id="favoritesDiv">
+    <h3 style="text-align: center">Favorites</h3>
+    <ul id="favorites">
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("#manufacturers li").click(function () {
+            $("#models").html("");
+            let code = $(this).attr("code");
+            $.ajax({
+                url: "https://parallelum.com.br/fipe/api/v1/carros/marcas/" + code + "/modelos",
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $.each(data.modelos, function (i, item) {
+                        $("<li><b>" + item.nome + "</b><br><span>" + item.codigo + "</span></li>").appendTo("#models");
+                    })
+                }
+            })
+        })
+        $(document).on("click", "#models li", function () {
+            $(this).find("span").slideToggle();
+        })
+        $(document).on("click", "#favorites li", function () {
+            $(this).find("span").slideToggle();
+        })
+
+        $("#models").sortable({
+            connectWith: "#favorites"
+        })
+        $("#favorites").sortable({
+            connectWith: "#models"
+        })
+    })
+</script>
+</body>
+</html>

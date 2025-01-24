@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cocktails</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid black;
+            background: #fddce2;
+            border-radius: 20px;
+            width: 200px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #menu, #cocktails {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        #cocktails li:nth-child(2n) {
+            background: #d4e9f1;
+        }
+
+        #cocktails li:nth-child(2n+1) {
+            background: #ecb1d8;
+        }
+
+        .data {
+            display: none;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+<ul id="menu">
+    <li>Margarita</li>
+    <li>Mojito</li>
+    <li>Whiskey Sour</li>
+    <li>Daiquiri</li>
+</ul>
+
+<ul id="cocktails">
+
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $("#menu li").click(function () {
+            $("#cocktails").html("");
+            let cocktail = $(this).html();
+            $.ajax({
+                url: "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktail,
+                dataType: "json",
+                success: function (data) {
+                    console.log(data);
+                    $.each(data.drinks, function (i, item) {
+                        $("<li title='" + item.idDrink + "'><b>" + item.strDrink + "</b><br><span class='data'>" + item.strInstructions + "</span></li>").appendTo("#cocktails");
+                    })
+                }
+            })
+        })
+
+        $(document).tooltip();
+
+        $(document).on("click", "#cocktails li", function () {
+            $(".data").hide();
+            $(this).find(".data").toggle();
+        })
+    })
+</script>
+</body>
+</html>

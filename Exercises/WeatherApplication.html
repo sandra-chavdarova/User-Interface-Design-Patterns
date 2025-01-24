@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+
+    <style>
+        div {
+            vertical-align: top;
+        }
+
+        body {
+            font-family: Calibri, serif;
+            font-size: 18px;
+        }
+
+        .city {
+            padding: 10px;
+            margin: 10px;
+            border-radius: 20px;
+            border: 2px solid black;
+            width: 250px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .city:nth-child(2n) {
+            background: lightblue;
+        }
+
+        #dates div, #details div, #good_weather div {
+            padding: 5px;
+            margin: 5px;
+            border: 2px solid black;
+            width: 250px;
+            text-align: center;
+            cursor: pointer;
+            background: #dcccf5;
+        }
+
+        #dates, #cities, #details {
+            display: inline-block;
+        }
+
+        p {
+            margin: 2px;
+        }
+
+        .date {
+            padding: 2px;
+        }
+
+        button {
+            padding: 3px;
+            font-size: 15px;
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+<div id="cities">
+    <div id="44418" class="city">London</div>
+    <div id="2487956" class="city">San Francisco</div>
+    <div id="615702" class="city">Paris</div>
+    <div id="2122265" class="city">Moscow</div>
+    <div id="1118370" class="city">Tokyo</div>
+</div>
+<div id="dates">
+</div>
+
+<div id="details">
+
+</div>
+
+<div style="display: inline-block; width: 300px">
+    <h4 style="text-align: center">Days with nice weather</h4>
+    <div id="good_weather">
+
+    </div>
+    <p>Total: <span id="total">0</span></p>
+</div>
+
+<script>
+    $(document).ready(function () {
+        let total = 0;
+        $(".city").click(function () {
+            $("#dates").html("");
+            $.ajax({
+                url: "https://webhook.site/f48e4284-a294-4349-a6af-a8beb61b20c6",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data.consolidated_weather, function (index, item) {
+                        $("<div class='date' opened='0' weather='" + item.weather_state_name + "' min='" + item.min_temp + "' max='" + item.max_temp + "' humidity='" + item.humidity + "'><b>" + item.applicable_date + "</b></div>").appendTo("#dates");
+                    })
+                }
+            })
+        })
+
+        // two-panel selector
+        $(document).on("click", "#dates div", function () {
+            $("#details").html("");
+            $("<div><p>Weather: " + $(this).attr("weather") + "</p><p>Min. temperature: " + $(this).attr("min") + "</p><p>Max. temperature: " + $(this).attr("max") + "</p><p>Humidity: " + $(this).attr("humidity") + "</p><button class='add'>Pin</button></div>").appendTo("#details");
+        })
+
+        // list builder
+        $(document).on("click", ".add", function () {
+            $(this).parent().appendTo("#good_weather");
+            $(this).hide();
+            total++;
+            $("#total").html(total);
+        })
+    })
+</script>
+</body>
+</html>

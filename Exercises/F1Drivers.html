@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 drivers</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+
+    <style>
+        body {
+            font-size: 18px;
+            font-family: Calibri, serif;
+        }
+
+        div {
+            vertical-align: top;
+        }
+
+        li {
+            cursor: pointer;
+            padding: 10px;
+            border: 2px solid black;
+            width: 250px;
+            margin: 5px;
+            text-align: center;
+            border-radius: 20px;
+            vertical-align: top;
+        }
+
+        .item li:nth-child(2n) {
+            background: #c1fac1;
+        }
+
+        .item li:nth-child(2n+1) {
+            background: lightyellow;
+        }
+
+        .item, .favorites {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        h3 {
+            vertical-align: top;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .inlay {
+            display: none;
+        }
+
+        .favorites {
+            border: 2px solid black;
+            border-radius: 30px;
+            width: 360px;
+            margin: 20px;
+            text-align: center;
+            padding: 20px;
+
+        }
+
+        .favorites li {
+            background: mediumpurple;
+        }
+
+        #links {
+            display: none;
+        }
+
+        #favorites-list{
+            height: 500px;
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+<div class="item">
+    <ul id="years">
+        <li year="2019">2019</li>
+        <li year="2020">2020</li>
+        <li year="2021">2021</li>
+        <li year="2022">2022</li>
+        <li year="2023">2023</li>
+        <li year="2024">2024</li>
+    </ul>
+</div>
+<div class="item">
+    <ul id="drivers">
+
+    </ul>
+</div>
+
+<div class="favorites">
+    <h3>Favorites:</h3>
+    <ul id="favorites-list">
+
+    </ul>
+</div>
+
+<aside id="links">
+    <a href="https://facebook.com"><img src="../images/facebook.jpg" height="30" width="30"/></a>
+    <a href="https://linkedin.com"><img src="../images/linkedin.png" height="30" width="30"/></a>
+    <a href="https://instagram.com"><img src="../images/instagram.jpg" height="30" width="30"/></a>
+</aside>
+
+<script>
+    $(document).ready(function () {
+        let flag = 0;
+        let limit = 5, offset = 0;
+        $("#years li").click(function () {
+            year = $(this).attr("year");
+            $("#drivers").html("");
+            get_data();
+        })
+
+        function get_data() {
+            if (flag)
+                return;
+            flag = 1;
+            $.ajax({
+                url: "http://ergast.com/api/f1/" + year + "/drivers.json?limit=" + limit + "&offset=" + offset,
+                dataType: "jsonp",
+                success: function (data) {
+                    // console.log("data")
+                    flag = 0;
+                    offset += limit;
+                    $.each(data.MRData.DriverTable.Drivers, function (index, item) {
+                        // console.log(this)
+                        // console.log(item)
+                        $("<li title='" + item.nationality + "'>" + item.givenName + " " + item.familyName + "<br><span class='inlay'>" + item.dateOfBirth + "<br><a href='" + item.url + "'>Wikipedia</a> <p class='image'></p></span></li>").appendTo("#drivers");
+                    })
+                }
+            })
+        }
+
+        // tooltip
+        $(document).tooltip();
+
+        // list builder
+        $("#favorites-list").sortable({
+            connectWith: "#drivers"
+        })
+        $("#drivers").sortable({
+            connectWith: "#favorites-list"
+        })
+
+        // list inlay
+        $(document).on("click", "#drivers li", function () { // #drivers li
+            $(this).siblings().find(".inlay").hide()
+            let links = $("#links");
+            links.show();
+            $(this).find(".image").append(links);
+            $(this).find(".inlay").slideToggle();
+        })
+
+        // scrolling
+        $(window).scroll(function () {
+            if (($(window).scrollTop() + $(window).height()) >= ($(document).height() - 50)) {
+                get_data();
+                // console.log("scroll")
+            }
+        })
+    })
+</script>
+</body>
+</html>

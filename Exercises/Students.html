@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .item {
+            display: inline-block;
+            width: 300px;
+            vertical-align: top;
+        }
+    </style>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+</head>
+<body>
+<div class="item">
+    <h2>Students</h2>
+    <ul id="left">
+        <li>Name Surname 1 111111</li>
+        <li>Name Surname 2 111111</li>
+        <li>Name Surname 3 111111</li>
+        <li>Name Surname 4 111111</li>
+        <li>Name Surname 5 111111</li>
+        <li>Name Surname 6 111111</li>
+    </ul>
+</div>
+
+<div class="item">
+    <h2>Results</h2>
+    <ul id="right">
+        <li title="80">Name Surname 1 111111</li>
+    </ul>
+</div>
+<br>
+<button id="add">Add new student</button>
+<div id="new_student_dialog">
+    <p>Name: </p>
+    <input type="text" id="name">
+    <p>Index: </p>
+    <input type="text" id="index">
+</div>
+
+<div id="points_dialog">
+    <p>Points: </p>
+    <input type="text" id="points">
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $("#add").click(function () {
+            $("#new_student_dialog").dialog("open");
+        })
+        $("#new_student_dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                OK: function () {
+                    var name = $("#name").val()
+                    var index = $("#index").val()
+                    var full_name = name + " " + index;
+                    $("#left").append("<li>" + full_name + "</li>")
+                    $("#new_student_dialog").dialog("close");
+                }
+            }
+        })
+        $("#left").sortable({
+            connectWith: "#right"
+        })
+
+        $("#points_dialog").dialog({
+            autoOpen: false,
+            modal: true,
+            buttons: {
+                OK: function () {
+                    var points = $("#points").val();
+                    $student.attr("title", points);
+                    $("#points_dialog").dialog("close")
+
+                }
+            }
+        })
+
+        var $student = 0 // globalen jq object
+        $("#right").sortable({
+            receive: function (event, ui) {
+                $student = ui.item;
+                $("#points_dialog").dialog("open")
+            }
+        })
+
+        $(document).tooltip()
+
+    })
+</script>
+</body>
+</html>
+

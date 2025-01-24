@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comics</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        #menu, #panel {
+            display: inline-block;
+            margin: 10px;
+            vertical-align: top;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 15px;
+            margin: 5px;
+            border: 2px solid black;
+            background: #dde9ee;
+            cursor: pointer;
+        }
+
+        #menu li {
+            background: #cee3ce;
+            border-radius: 20px;
+        }
+
+        #comics li {
+            width: 300px;
+        }
+
+        span {
+            display: none;
+        }
+
+        img {
+            width: 30px;
+            height: 30px;
+            padding: 5px;
+        }
+
+        .data {
+            margin: 0;
+        }
+
+        footer {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+<div id="menu">
+    <ul>
+        <li date="2016-01-20">20 Jan 2016</li>
+        <li date="2016-01-27">27 Jan 2016</li>
+        <li date="2016-02-03">03 Feb 2016</li>
+        <li date="2016-02-10">10 Feb 2016</li>
+        <li date="2016-02-17">17 Feb 2016</li>
+    </ul>
+    <footer>
+        <a href="https://facebook.com"><img src="../images/facebook.jpg" height="2048" width="2048"/></a>
+        <a href="https://linkedin.com"><img src="../images/linkedin.png" height="2048" width="2048"/></a>
+        <a href="https://instagram.com"><img src="../images/instagram.jpg" height="2048" width="2048"/></a>
+    </footer>
+</div>
+<div id="panel">
+    <ul id="comics">
+
+    </ul>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $("li").click(function () {
+            $("#comics").html("");
+            let year = $(this).attr("date");
+            $.ajax({
+                url: "https://cors-anywhere.herokuapp.com/https://api.shortboxed.com/comics/v1/release_date/" + year,
+                dataType: "json",
+                success: function (data) {
+                    $.each(data.comics, function (i, item) {
+                        console.log(item.description)
+                        $("<li>Title: " + item.title + "<br>Price: " + item.price + "<br><span class='data'>Description: " + item.description + "<br>Creators: " + item.creators + "</span></li>").appendTo("#comics");
+                    })
+                }
+            })
+        })
+        $(document).on("click", "#comics li", function () {
+            $(this).find(".data").slideToggle();
+        })
+    })
+</script>
+</body>
+</html>

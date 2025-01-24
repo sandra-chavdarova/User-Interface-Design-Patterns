@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Game</title>
+    <style>
+        .item {
+            width: 150px;
+            height: 150px;
+            border: 2px solid black;
+            display: inline-block;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            background: gray;
+        }
+    </style>
+</head>
+
+<body>
+<div class="row">
+    <div class="item" id="blue"></div>
+    <div class="item" id="yellow"></div>
+    <div class="item" id="pink"></div>
+    <div class="item" id="green"></div>
+    <div class="item" id="purple"></div>
+</div>
+
+<input type="text" id="input" size="100">
+<input type="submit" id="submit" onclick="change()">
+
+<script>
+    function change() {
+        var blue = document.getElementById("blue");
+        var yellow = document.getElementById("yellow");
+        var pink = document.getElementById("pink");
+        var green = document.getElementById("green");
+        var purple = document.getElementById("purple");
+
+        var input = document.getElementById("input").value;
+        var answer = "blue, yellow, pink, green, purple";
+
+        function hidden() {
+            blue.style.background = "gray";
+            yellow.style.background = "gray";
+            pink.style.background = "gray";
+            green.style.background = "gray";
+            purple.style.background = "gray";
+        }
+
+        function colors() {
+            blue.style.background = "cornflowerblue";
+            yellow.style.background = "yellow";
+            pink.style.background = "pink";
+            green.style.background = "lightgreen";
+            purple.style.background = "mediumpurple";
+        }
+
+        function message() {
+            alert("Congratulations! You won!")
+        }
+
+        if (input === answer) {
+            colors();
+            setTimeout(message, 500);
+        } else {
+            colors();
+            setTimeout(hidden, 2000);
+        }
+
+    }
+</script>
+
+</body>
+</html>

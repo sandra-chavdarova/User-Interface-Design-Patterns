@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Scrolling - F1 Drivers</title>
+    <style>
+        body, button {
+            font-size: 17px;
+            font-family: Calibri, serif;
+        }
+
+        h2 {
+            padding: 5px;
+            margin-left: 70px;
+        }
+
+        #drivers, #details {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px;
+            border: 2px solid black;
+            border-radius: 20px;
+            cursor: pointer;
+            text-align: center;
+            width: 150px;
+        }
+
+        #drivers li:nth-child(2n) {
+            background: #c6e3c6;
+        }
+
+        footer {
+            margin: 10px;
+        }
+
+        img {
+            margin: 5px;
+            width: 30px;
+            height: 30px;
+        }
+
+        button {
+            margin: 5px;
+        }
+
+        .details {
+            border: 2px solid black;
+            background: #ece9e9;
+            text-align: center;
+            padding: 10px;
+            margin: 5px;
+            width: 250px;
+            height: 300px;
+        }
+    </style>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+</head>
+<body>
+<h2>F1 Drivers</h2>
+<div id="menu">
+    <ul id="drivers">
+
+    </ul>
+    <br>
+    <button id="load">Load more</button>
+    <img id="loading" style="margin: 15px" src="../images/Loading_2.gif" height="198" width="198"/></div>
+<div id="details">
+    <div id="detailsDiv" class='details'>
+
+    </div>
+    <button id="back">Back</button>
+</div>
+<footer>
+    <a href="https://facebook.com"><img src="../images/facebook.jpg" height="2048" width="2048"/></a>
+    <a href="https://linkedin.com"><img src="../images/linkedin.png" height="1080" width="1080"/></a>
+    <a href="https://instagram.com"><img src="../images/instagram.jpg" height="640" width="640"/></a>
+</footer>
+
+<script>
+    $(document).ready(function () {
+        $("#details").hide();
+        let limit = 7, offset = 0;
+
+        function get_data() {
+            $("#loading").show();
+            $.ajax({
+                url: "http://ergast.com/api/f1/2023/drivers.json?offset=" + offset + "&limit=" + limit,
+                dataType: "json",
+                success: function (data) {
+                    $("#loading").hide();
+                    // console.log(data);
+                    $.each(data.MRData.DriverTable.Drivers, function (i, item) {
+                        $("<li number='" + item.permanentNumber + "' birth='" + item.dateOfBirth + "' nationality='" + item.nationality + "' url='" + item.url + "'>" + item.givenName + " " + item.familyName + "</li>").appendTo("#drivers");
+                    })
+                }
+            })
+        }
+
+        $(document).on("click", "#drivers li", function () {
+            let info = $("<p><b>Number: </b>" + $(this).attr("number") + "</p><p><b>Date of birth: </b>" + $(this).attr("birth") + "</p><p><b>Nationality: </b>" + $(this).attr("nationality") + "</p><a href='" + $(this).attr("url") + "'>Biography</a>");
+            $("#detailsDiv").html(info);
+            $("#menu").hide();
+            $("#details").show();
+        })
+
+        $("#back").click(function () {
+            $("#details").hide();
+            $("#menu").show();
+        })
+
+        $("#load").click(function () {
+            offset += 7;
+            get_data();
+        })
+        get_data();
+    })
+</script>
+</body>
+</html>
+
