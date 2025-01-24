@@ -29,11 +29,7 @@
         }
 
         .item li:nth-child(2n) {
-            background: #c1fac1;
-        }
-
-        .item li:nth-child(2n+1) {
-            background: lightyellow;
+            background: lightblue;
         }
 
         .item, .favorites {
@@ -73,9 +69,14 @@
             display: none;
         }
 
-        #favorites-list{
+        #favorites-list {
             height: 500px;
             width: 300px;
+        }
+
+        #indicator {
+            width: 100px;
+            height: 100px;
         }
     </style>
 </head>
@@ -91,6 +92,7 @@
     </ul>
 </div>
 <div class="item">
+    <img id="indicator" src="../images/Loading_2.gif"/>
     <ul id="drivers">
 
     </ul>
@@ -111,9 +113,11 @@
 
 <script>
     $(document).ready(function () {
+        $("#indicator").hide();
         let flag = 0;
         let limit = 5, offset = 0;
         $("#years li").click(function () {
+            $("#indicator").show();
             year = $(this).attr("year");
             $("#drivers").html("");
             get_data();
@@ -128,6 +132,7 @@
                 dataType: "jsonp",
                 success: function (data) {
                     // console.log("data")
+                    $("#indicator").hide();
                     flag = 0;
                     offset += limit;
                     $.each(data.MRData.DriverTable.Drivers, function (index, item) {
