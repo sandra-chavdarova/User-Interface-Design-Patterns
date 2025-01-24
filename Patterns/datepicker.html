@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Datepicker</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+</head>
+<body>
+<label>Enter a date: </label><input id="date"><br>
+<script>
+    $(document).ready(function() {
+        $("#date").datepicker({
+            changeYear: true,
+            changeMonth: true,
+            firstDay: 0,
+            dateFormat: "dd D MM yy",
+            dayNamesMin: ["Пон", "Вто", "Сре", "Чет", "Пет", "Саб", "Нед"],
+            numberOfMonths: 1,
+        })
+    })
+</script>
+</body>
+</html>

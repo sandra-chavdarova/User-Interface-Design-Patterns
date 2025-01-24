@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Titled Section</title>
+    <style>
+        .section {
+            float: left;
+            width: 300px;
+        }
+
+        li {
+            list-style-type: circle;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .section div:first-child{
+            background: red;
+            padding: 2px;
+        }
+
+        .section div:nth-child(2){
+            border-left: solid black 2px;
+            height: 200px;
+        }
+
+        .section:nth-child(3) div:nth-child(2){
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Titled Section</h1>
+<div class="section">
+    <div>
+        <h2>Options</h2>
+    </div>
+    <div>
+        <ul>
+            <li><a href="#">disabled</a></li>
+            <li><a href="#">icons</a></li>
+            <li><a href="#">items</a></li>
+            <li><a href="#">menus</a></li>
+            <li><a href="#">position</a></li>
+        </ul>
+    </div>
+</div>
+<div class="section">
+    <div>
+        <h2>Options</h2>
+    </div>
+    <div>
+        <ul>
+            <li><a href="#">blur</a></li>
+            <li><a href="#">collapsed</a></li>
+            <li><a href="#">collapseAll</a></li>
+            <li><a href="#">destroy</a></li>
+            <li><a href="#">disable</a></li>
+            <li><a href="#">previous</a></li>
+            <li><a href="#">next</a></li>
+            <li><a href="#">select</a></li>
+        </ul>
+    </div>
+</div>
+<div class="section">
+    <div>
+        <h2>Options</h2>
+    </div>
+    <div>
+        <ul>
+            <li><a href="#">blur</a></li>
+            <li><a href="#">create</a></li>
+            <li><a href="#">focus</a></li>
+            <li><a href="#">select</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List builder</title>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery.js"></script>
+    <script src="../jquery/jquery-ui.js"></script>
+    <style>
+        ul {
+            list-style-type: none;
+            display: inline-block;
+            width: 200px;
+            vertical-align: top;
+        }
+
+        .ui-selectee {
+            background: lightgreen;
+            border: 1px solid black;
+            padding: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .ui-selected {
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+<ul id="left">
+    <li>Item 1</li>
+    <li>Item 2</li>
+    <li>Item 3</li>
+    <li>Item 4</li>
+    <li>Item 5</li>
+</ul>
+<button id="to_left"><</button>
+<button id="to_right">></button>
+<ul id="right">
+    <li>Item 6</li>
+    <li>Item 7</li>
+    <li>Item 8</li>
+    <li>Item 9</li>
+    <li>Item 10</li>
+</ul>
+<script>
+    $(document).ready(function () {
+        $("ul").selectable({ /* site od li dobivaat klasa */})
+        $("#to_right").click(function () {
+            $("#left .ui-selected").appendTo("#right").removeClass("ui-selected");
+        })
+        $("#to_left").click(function () {
+            $("#right .ui-selected").appendTo("#left").removeClass("ui-selected");
+        })
+    })
+</script>
+</body>
+</html>

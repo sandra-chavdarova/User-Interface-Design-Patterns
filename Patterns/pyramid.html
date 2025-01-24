@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pyramid</title>
+    <script src="../jquery/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="../jquery/jquery-ui.css">
+    <script src="../jquery/jquery-ui.js"></script>
+    <script src="../jquery/jquery.js"></script>
+
+    <style>
+        html {
+            font-family: Calibri, serif;
+            font-size: 20px;
+        }
+
+        li {
+            background: mediumpurple;
+            margin-bottom: 5px;
+            width: 200px;
+            padding: 5px;
+        }
+
+        button {
+            margin-bottom: 5px;
+            font-size: 20px;
+            display: inline-block;
+            margin-right: 5px;
+        }
+    </style>
+
+</head>
+<body>
+<div id="homepage">
+    <ul id="list">
+        <li value="0">Oblivion</li>
+        <li value="1">Ender's Game</li>
+        <li value="2">Elysium</li>
+        <li value="3">Edge of Tomorrow</li>
+    </ul>
+</div>
+<div id="details">
+    <button id="back">Back</button>
+    <button id="home">Home</button>
+    <button id="next">Next</button>
+    <h2 id="title"></h2>
+    <div id="content"></div>
+</div>
+<script>
+    let movies = [
+        {
+            name: "Oblivion",
+            summary: "A veteran assigned to extract Earth's remaining resources begins to question what he knows about his mission and himself."
+        },
+        {
+            name: "Ender's Game",
+            summary: "Young Ender Wiggin is recruited to lead humanity's defense against an alien race."
+        },
+        {
+            name: "Elysium",
+            summary: "In the year 2154, the very wealthy live on a space station while the rest of the population resides on a ruined Earth."
+        },
+        {
+            name: "Edge of Tomorrow",
+            summary: "A soldier fighting aliens gets to relive the same day over and over again, the day restarting every time he dies."
+        }
+    ];
+
+    function displayMovie(index) {
+        $("#title").text(movies[index].name);
+        $("#content").text(movies[index].summary);
+    }
+
+    $(document).ready(function () {
+        let index = 0;
+        $("#details").hide();
+        $("#list li").click(function () {
+            $("#details").show();
+            $("#homepage").hide();
+            index = $(this).attr("value");
+            displayMovie(index);
+        });
+
+        $("#home").click(function () {
+            $("#details").hide();
+            $("#homepage").show();
+        })
+
+        $("#next").click(function () {
+            if (index < movies.length - 1) {
+                index++;
+            } else {
+                index = 0;
+            }
+            displayMovie(index);
+        });
+        $("#back").click(function () {
+            if (index > 0) {
+                index--;
+            } else {
+                index = movies.length - 1;
+            }
+            displayMovie(index);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visual Frame</title>
+    <style>
+        #navbar {
+            background: #dadada;
+            padding: 20px;
+        }
+
+        .nav:hover {
+            background: lightgray;
+        }
+
+        #container {
+            background: lightyellow;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="navbar">
+    <h1>Navigation Bar</h1>
+    <button class="nav" title="tab1">Tab 1</button>
+    <button class="nav" title="tab2">Tab 2</button>
+    <button class="nav" title="tab3">Tab 3</button>
+</div>
+<div id="container">
+    <h1>Content Bar</h1>
+    <div id="tab1">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut varius nisl orci, nec iaculis risus pretium vitae.
+        Vestibulum nisl sem, fermentum a ornare at, posuere sit amet ante. Nunc at fermentum turpis. Duis malesuada
+        consequat ipsum viverra laoreet. Proin ornare ultrices finibus. Sed pharetra justo non hendrerit aliquet. Proin
+        pulvinar felis aliquet nunc condimentum, eget maximus risus auctor. In eu urna urna. Sed non erat consectetur,
+        pellentesque magna a, blandit arcu. Interdum et malesuada fames ac ante ipsum primis in faucibus. Duis id velit
+        eget est sodales vestibulum. Vivamus et venenatis libero.
+    </div>
+    <div id="tab2">
+        Etiam rutrum, risus sit amet tincidunt lobortis, augue lacus convallis felis, et lacinia enim lorem pretium
+        felis. Nunc et risus gravida ipsum viverra sollicitudin quis ut turpis. Etiam vulputate in risus id rhoncus. Sed
+        rutrum, ante non vulputate vestibulum, ex tellus dignissim ligula, vel laoreet massa ante non eros. Vivamus
+        porta, nulla sit amet elementum blandit, sem leo pellentesque nibh, ut tempus felis neque sed felis. Donec odio
+        purus, fermentum at lectus sit amet, fermentum vestibulum ante. Praesent a nunc nec quam blandit tincidunt.
+        Maecenas a risus placerat, porta enim et, bibendum ante. Phasellus accumsan convallis dui, in tincidunt lorem
+        vulputate at. Donec lorem dui, sollicitudin ut orci nec, pellentesque rhoncus orci. Cras et ultricies orci, eu
+        euismod turpis. Donec orci elit, ultricies sit amet laoreet ac, volutpat vitae turpis.
+    </div>
+    <div id="tab3">
+        Sed convallis libero eget massa venenatis finibus. Praesent at nisl sit amet purus molestie sagittis vel eget
+        elit. Suspendisse tincidunt, nisi eget dapibus porttitor, lectus nunc maximus libero, et auctor nibh sem at
+        purus. Morbi tristique semper tortor. Phasellus cursus mauris at turpis malesuada dictum. Aliquam augue nibh,
+        pellentesque et est in, dictum molestie diam. Duis sit amet nibh eros. Etiam et ipsum varius, tempor eros ac,
+        commodo nunc. Nunc varius egestas justo in efficitur. Vivamus mattis fringilla nibh non scelerisque. Suspendisse
+        eleifend felis ligula, dapibus tristique justo ultricies at. Fusce et mauris vel libero feugiat elementum. Donec
+        sapien quam, malesuada tempus dolor ut, rutrum auctor dolor. Ut pulvinar risus nec nulla volutpat molestie.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas ligula ac augue eleifend elementum.
+    </div>
+    <script type="text/javascript" src="../jquery/jquery-1.11.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#container div").hide();
+            $("button").click(function () {
+                let id = $(this).attr("title");
+                $("#container div").hide();
+                $("#" + id).show();
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

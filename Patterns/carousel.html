@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Carousel</title>
+    <link rel="stylesheet" href="../jquery/style.css">
+    <script src="../../../../../Sandra/FCSE/III семестар/Шаблони за дизајн на кориснички интерфејси/Аудиториски вежби/07 Примери од предавања/jCarousel/lib/jquery.jcarousel.min.js"></script>
+    <script src="../../../../../Sandra/FCSE/III семестар/Шаблони за дизајн на кориснички интерфејси/Аудиториски вежби/07 Примери од предавања/jCarousel/lib/jquery-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="../jquery/skin.css">
+</head>
+<body>
+<!-- NE RABOTI -->
+<div id="wrap">
+    <ul id="mycarousel" class="jcarousel-skin-tango">
+        <li><img src="../images/flowers.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/stars.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/flowers.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/stars.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/flowers.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/stars.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/flowers.jpg" width="75px" height="75px" alt=""></li>
+        <li><img src="../images/stars.jpg" width="75px" height="75px" alt=""></li>
+    </ul>
+</div>
+<script>
+    jQuery(document).ready(function () {
+        jQuery("#mycarousel").jcarousel();
+    });
+</script>
+</body>
+</html>
