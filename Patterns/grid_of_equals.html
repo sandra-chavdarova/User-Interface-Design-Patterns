@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grid of Equals</title>
+    <script src="../jquery/jquery-1.11.1.min.js"></script>
+    <style>
+        .row div {
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            background: mediumpurple;
+            border: 2px solid black;
+            margin-bottom: 5px;
+            text-align: center;
+            vertical-align: top;
+        }
+
+        span {
+            display: block;
+            padding: 80px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        p {
+            display: none;
+        }
+
+        .row div:hover {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div id="1">
+        <span>1</span>
+        <p>Tile 1</p>
+    </div>
+    <div id="2">
+        <span>2</span>
+        <p>Tile 2</p>
+    </div>
+    <div id="3">
+        <span>3</span>
+        <p>Tile 3</p>
+    </div>
+</div>
+<div class="row">
+    <div id="4">
+        <span>4</span>
+        <p>Tile 4</p>
+    </div>
+    <div id="5">
+        <span>5</span>
+        <p>Tile 5</p>
+    </div>
+    <div id="6">
+        <span>6</span>
+        <p>Tile 6</p>
+    </div>
+</div>
+<div class="row">
+    <div id="7">
+        <span>7</span>
+        <p>Tile 7</p>
+    </div>
+    <div id="8">
+        <span>8</span>
+        <p>Tile 8</p>
+    </div>
+    <div id="9">
+        <span>9</span>
+        <p>Tile 9</p>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".row div").hover(function () {
+            $(this).find("span").toggle();
+            $(this).find("p").toggle();
+        }, function () {
+            $(this).find('span').toggle();
+            $(this).find("p").toggle();
+        });
+    });
+</script>
+
+</body>
+</html>
